@@ -194,6 +194,9 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section mt-2">
         <div class="container">
+            <div class="alert alert-warning text-center shadow mb-5 leave-notice" role="status">
+                <strong>Maternity leave:</strong> Joelle is on maternity leave and will begin taking bookings again in June 2027.
+            </div>
             <div class="row align-items-center">
                 <div class="col-lg-6 text-center text-lg-start">
                     <h1 class="display-4 fw-bold mb-4">Welcome to GC Face Painting</h1>
@@ -359,7 +362,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center mb-3">
                     <h2 class="display-5 fw-bold">Get in Touch</h2>
-                    <p class="lead">
+                    <p class="lead leave-notice">
+                        Joelle is on maternity leave and will begin taking bookings again in June 2027.
+                        Thank you for your patience!
+                    </p>
+                    <p class="lead leave-hidden" hidden>
                         Fill out the form below to book or enquire about face painting at your party!
                         Available weeknights, all day Saturday, and Sundays from 12 pm onwards.
                     </p>
@@ -372,7 +379,9 @@
                         <div class="card-body p-2">
                             <!-- Replace this src with your actual Google Form embed URL -->
                             <iframe
-                                src="https://gcfacepaintingform.kaiser.lol"
+                                class="leave-hidden"
+                                hidden
+                                data-src="https://gcfacepaintingform.kaiser.lol"
                                 width="100%"
                                 height="580"
                                 frameborder="0"
@@ -462,6 +471,15 @@
                 }
             });
         });
+
+        // Maternity leave runs until the end of May 2027 (local time)
+        if (new Date() >= new Date(2027, 5, 1)) {
+            document.querySelectorAll('.leave-notice').forEach(el => el.remove());
+            document.querySelectorAll('.leave-hidden').forEach(el => {
+                el.hidden = false;
+                if (el.dataset.src) el.src = el.dataset.src;
+            });
+        }
 
         // Function to scroll to contact section (used by buttons)
         function scrollToContact() {
